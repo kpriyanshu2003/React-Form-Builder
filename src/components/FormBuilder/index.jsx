@@ -16,7 +16,7 @@ import {
   DateInput,
   TimeInput,
 } from "./elements";
-import Layout from './elements/layout'
+import Layout from "./elements/layout";
 import { formEl } from "./constants.js";
 //Components
 import Header from "./Header";
@@ -51,20 +51,20 @@ const FormBuilder = () => {
 
   //Function to add element at specific pos and return arr
   const addAfter = (elArray, index, newEl) => {
-    return [...elArray.slice(0, index+1), newEl, ...elArray.slice(index+1)];
+    return [...elArray.slice(0, index + 1), newEl, ...elArray.slice(index + 1)];
   };
 
   //Function to duplicate element
   const duplicateElement = (elId, elType) => {
-    let elIdx = data.findIndex( (el) =>el.id === elId);
+    let elIdx = data.findIndex((el) => el.id === elId);
     let newEl = {
       id: uuid(),
       value: null,
       type: elType,
       required: false,
-    }
-    let newArr = addAfter(data,elIdx,newEl)
-    setData(newArr)
+    };
+    let newArr = addAfter(data, elIdx, newEl);
+    setData(newArr);
   };
 
   //Function to handle sorting of elements
@@ -75,7 +75,7 @@ const FormBuilder = () => {
   //Function to Handle Input Values
   const handleValue = (id, e) => {
     let newArr = data.map((el) => {
-      if (el.id == id) {
+      if (el.id === id) {
         return { ...el, value: e.target.value };
       } else {
         return el;
@@ -87,7 +87,7 @@ const FormBuilder = () => {
   //Function to Handle Required
   const handleRequired = (id) => {
     let newArr = data.map((el) => {
-      if (el.id == id) {
+      if (el.id === id) {
         return { ...el, required: !el.required };
       } else {
         return el;
@@ -99,7 +99,7 @@ const FormBuilder = () => {
   //Function to Handle Element Type
   const handleElType = (id, type) => {
     let newArr = data.map((el) => {
-      if (el.id == id) {
+      if (el.id === id) {
         return { ...el, type: type };
       } else {
         return el;
@@ -111,7 +111,7 @@ const FormBuilder = () => {
   //Function to Handle Options
   const addOption = (id, newOption) => {
     let newArr = data.map((el) => {
-      if (el.id == id) {
+      if (el.id === id) {
         const objVal = "options" in el ? el?.options : [];
         return { ...el, options: [...objVal, newOption] };
       } else {
@@ -124,7 +124,7 @@ const FormBuilder = () => {
   //Function to Handle Date
   const handleDate = (id, dateVal) => {
     let newArr = data.map((el) => {
-      if (el.id == id) {
+      if (el.id === id) {
         return { ...el, date: dateVal };
       } else {
         return el;
@@ -136,7 +136,7 @@ const FormBuilder = () => {
   //Function to Handle Time
   const handleTime = (id, dateVal) => {
     let newArr = data.map((el) => {
-      if (el.id == id) {
+      if (el.id === id) {
         return { ...el, time: dateVal };
       } else {
         return el;
@@ -148,10 +148,10 @@ const FormBuilder = () => {
   //Function to Change Option Values
   const handleOptionValues = (elId, optionId, optionVal) => {
     let newArr = data.map((el) => {
-      if (el.id == elId) {
+      if (el.id === elId) {
         el?.options &&
           el?.options.map((opt) => {
-            if (opt.id == optionId) {
+            if (opt.id === optionId) {
               opt.value = optionVal;
             }
           });
@@ -166,7 +166,7 @@ const FormBuilder = () => {
   //Function to Delete Optin
   const deleteOption = (elId, optionId) => {
     let newArr = data.map((el) => {
-      if (el.id == elId) {
+      if (el.id === elId) {
         let newOptions =
           el?.options && el?.options.filter((opt) => opt.id != optionId);
         return { ...el, options: newOptions };
