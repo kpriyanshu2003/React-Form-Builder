@@ -17,27 +17,24 @@ import {
 
 import { formEl } from "./constants";
 import Header from "./Header";
-import { DataType } from "../../@types/FormBuilder";
+import { DataType, HeaderType } from "../../@types/FormBuilder";
 
 const FormBuilder = () => {
-  const [title, setTitle] = useState("Sample Title");
-  const [description, setDescription] = useState("Sample Descrpition");
+  const [header, setHeader] = useState<HeaderType>({
+    title: "Sample Title",
+    description: "Sample Description",
+  });
   const [data, setData] = useState<DataType[]>([]);
-  const [formData, setFormData] = useState("text");
-
-  const items = data;
-  const initVal = formEl[0]?.value;
 
   // Add new element
   const addElement = () => {
     const data = {
       id: uuid(),
       value: null,
-      type: formData,
+      type: formEl[0].value,
       required: false,
     };
     setData((prevState: DataType[]) => [...prevState, data]);
-    setFormData(initVal);
   };
 
   // Delete element
@@ -45,9 +42,11 @@ const FormBuilder = () => {
     setData((prevState) => prevState.filter((val) => val.id !== id));
 
   // Add element at specific pos and return arr
-  const addAfter = (elArray: DataType[], index: number, newEl: DataType) => {
-    return [...elArray.slice(0, index + 1), newEl, ...elArray.slice(index + 1)];
-  };
+  const addAfter = (elArray: DataType[], index: number, newEl: DataType) => [
+    ...elArray.slice(0, index + 1),
+    newEl,
+    ...elArray.slice(index + 1),
+  ];
 
   // Duplicate element
   const duplicateElement = (elId: string, elType: string) => {
@@ -62,10 +61,8 @@ const FormBuilder = () => {
     setData(newArr);
   };
 
-  // TODO : Add Type
   // Handle sorting of elements - I think not being used
-  const handleOnChangeSort = ({ items }: { items: DataType[] }) =>
-    setData(items);
+  const handleOnChange = ({ items }: { items: DataType[] }) => setData(items);
 
   // Handle Input Values
   const handleValue = (
@@ -99,7 +96,6 @@ const FormBuilder = () => {
     setData(newArr);
   };
 
-  // TODO : Add Type
   // Handle Options
   const addOption = (id: string, newOption: DataType) => {
     const newArr = data.map((el) => {
@@ -247,17 +243,12 @@ const FormBuilder = () => {
     <Fragment>
       <Grid container spacing={1} direction="row" justifyContent="center">
         <Grid item md={6}>
-          <Header
-            title={title}
-            setTitle={setTitle}
-            description={description}
-            setDescription={setDescription}
-          />
+          <Header header={header} setHeader={setHeader} />
           <Nestable
-            items={items}
+            items={data}
             renderItem={renderElements}
             maxDepth={1}
-            onChange={handleOnChangeSort}
+            onChange={handleOnChange}
           />
         </Grid>
         <Grid item md={1}>

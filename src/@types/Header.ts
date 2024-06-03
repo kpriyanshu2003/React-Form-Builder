@@ -1,8 +1,8 @@
 // src/components/FormBuilder/Header.ts
 
+import { HeaderType } from "./FormBuilder";
+
 export interface HeaderProps {
-  title: string;
-  description: string;
-  setTitle: (title: string) => void;
-  setDescription: (description: string) => void;
+  header: HeaderType;
+  setHeader: React.Dispatch<React.SetStateAction<HeaderType>>;
 }

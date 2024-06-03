@@ -4,9 +4,7 @@ export interface LayoutType {
   item: DataType;
   handleValue: (
     id: string,
-    e:
-      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      | React.FocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   deleteEl: (id: string) => void;
   handleRequired: (id: string) => void;

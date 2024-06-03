@@ -9,3 +9,8 @@ export interface DataType {
   date?: Date | null;
   time?: Date | null;
 }
+
+export interface HeaderType {
+  title: string;
+  description: string;
+}

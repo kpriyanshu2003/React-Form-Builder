@@ -59,7 +59,7 @@ const RadioInput = ({
               <TextField
                 defaultValue={item.value}
                 variant="outlined"
-                onBlur={(e) => handleValue(item.id, e)}
+                onChange={(e) => handleValue(item.id, e)}
                 fullWidth
                 required={item.required}
                 placeholder="Radio Label"
@@ -76,7 +76,7 @@ const RadioInput = ({
                       defaultValue={opt?.value}
                       key={opt?.id}
                       sx={{ mb: 1 }}
-                      onBlur={(e) =>
+                      onChange={(e) =>
                         handleOptionValues(item?.id, opt?.id, e.target.value)
                       }
                     />

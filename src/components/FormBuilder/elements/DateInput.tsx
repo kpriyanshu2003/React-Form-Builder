@@ -50,7 +50,7 @@ const DateInput = ({
               <TextField
                 defaultValue={item.value}
                 variant="outlined"
-                onBlur={(e) => handleValue(item.id, e)}
+                onChange={(e) => handleValue(item.id, e)}
                 fullWidth
                 required={item.required}
                 placeholder="Date Label"
