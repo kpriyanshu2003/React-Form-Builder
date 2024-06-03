@@ -1,9 +1,15 @@
-import { Fragment, useState } from "react";
-import Box from "@material-ui/core/Box";
-import TextField from "@material-ui/core/TextField";
-import Paper from "@material-ui/core/Paper";
+import { Fragment } from "react";
 
-const Header = ({ title, description, setTitle, setDescription }) => {
+// Material UI
+import { Box, Paper, TextField } from "@mui/material";
+import { HeaderProps } from "../../@types/Header";
+
+const Header = ({
+  title,
+  description,
+  setTitle,
+  setDescription,
+}: HeaderProps) => {
   return (
     <Fragment>
       <Box sx={{ mb: 3 }}>

@@ -1,29 +1,30 @@
 import { Fragment } from "react";
-//Material UI Components
-import TextField from "@material-ui/core/TextField";
-import Box from "@material-ui/core/Box";
-import Paper from "@material-ui/core/Paper";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
-import Grid from "@material-ui/core/Grid";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
-import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
-import DatePicker from "@material-ui/lab/DatePicker";
-//Icons
-import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
-import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
-import FileCopyIcon from '@material-ui/icons/FileCopy';
-
-//Form Elements
 import { formEl } from "../constants";
+
+// Material UI
+import {
+  Box,
+  Divider,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  Grid,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+  Switch,
+  TextField,
+  Tooltip,
+} from "@mui/material";
+
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers"; // @mui/x-date-pickers/LocalizationProvider @mui/x-date-pickers-pro
+
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
 
 const DateInput = ({
   item,
@@ -32,7 +33,7 @@ const DateInput = ({
   handleRequired,
   handleElType,
   handleDate,
-  duplicateElement
+  duplicateElement,
 }) => {
   return (
     <Fragment>
@@ -58,7 +59,9 @@ const DateInput = ({
                 <DatePicker
                   label="Select Date"
                   value={item?.date}
-                  onChange={(newDate) => {handleDate(item.id,newDate);}}
+                  onChange={(newDate) => {
+                    handleDate(item.id, newDate);
+                  }}
                   renderInput={(params) => <TextField fullWidth {...params} />}
                 />
               </LocalizationProvider>
@@ -98,7 +101,7 @@ const DateInput = ({
           <Tooltip title="Duplicate Element" aria-label="duplicate-element">
             <IconButton
               aria-label="duplicate-element"
-              onClick={() => duplicateElement(item.id,item.type)}
+              onClick={() => duplicateElement(item.id, item.type)}
               sx={{ ml: 2 }}
             >
               <FileCopyIcon color="secondary" />

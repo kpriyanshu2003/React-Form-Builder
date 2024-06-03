@@ -1,6 +1,20 @@
-# Google Forms Clone
+# React Form Builder
 
-This is a google form clone created with ReactJs.
+## Description
+
+- This is a google form clone created with ReactJs.
+- [docs.md](./docs/index.md)
+
+## Installation
+
+NOTE: Node.js version 16 required to run.
+
+```bash
+git clone {GIT_URL}
+cd {PROJECTNAME}
+yarn
+yarn dev
+```
 
 ## Features
 
@@ -15,21 +29,3 @@ This is a google form clone created with ReactJs.
   - NumberInput
   - DateInput
   - TimeInput
-
-## Usage
-
-NOTE: Node.js version 16 required to run.
-
-```bash
-git clone {GIT_URL}
-cd {PROJECTNAME}
-npm install
-npm start
-```
-
-## Updation
-
-- Runnable on Node js >=20
-- Removed deprecated dependencies
-- Improve styling
-- Update old dependencies

@@ -1,28 +1,29 @@
-import {  Fragment } from "react";
-import uuid from "react-uuid";
-//Material UI Components
-import TextField from "@material-ui/core/TextField";
-import Box from "@material-ui/core/Box";
-import Paper from "@material-ui/core/Paper";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
-import Grid from "@material-ui/core/Grid";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Button from "@material-ui/core/Button";
+import { Fragment } from "react";
+import { v4 as uuid } from "uuid";
 
-//Icons
-import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
-import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
-import FileCopyIcon from '@material-ui/icons/FileCopy';
+// Material UI
+import {
+  TextField,
+  Box,
+  Paper,
+  FormGroup,
+  FormControlLabel,
+  Switch,
+  Divider,
+  IconButton,
+  Tooltip,
+  Grid,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+  Button,
+} from "@mui/material";
 
-//Form Elements
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
+
 import { formEl } from "../constants";
 
 const RadioInput = ({
@@ -34,12 +35,11 @@ const RadioInput = ({
   addOption,
   handleOptionValues,
   deleteOption,
-  duplicateElement
+  duplicateElement,
 }) => {
-
   //Create new option
   const createNewOption = (id) => {
-    console.log(id,typeof(id),"this is id")
+    console.log(id, typeof id, "this is id");
     const data = {
       id: uuid(),
       value: "",
@@ -70,7 +70,7 @@ const RadioInput = ({
               {item.options &&
                 item.options.length > 0 &&
                 item.options.map((opt, key) => (
-                  <Box sx={{display:'flex'}}>
+                  <Box sx={{ display: "flex" }}>
                     <TextField
                       variant="outlined"
                       fullWidth
@@ -85,7 +85,7 @@ const RadioInput = ({
                     <Tooltip title="Delete Option" aria-label="delete-option">
                       <IconButton
                         aria-label="delete-option"
-                        onClick={() => deleteOption(item.id,opt?.id)}
+                        onClick={() => deleteOption(item.id, opt?.id)}
                         sx={{ ml: 2 }}
                       >
                         <DeleteOutlineOutlinedIcon color="secondary" />
@@ -132,7 +132,7 @@ const RadioInput = ({
           <Tooltip title="Duplicate Element" aria-label="duplicate-element">
             <IconButton
               aria-label="duplicate-element"
-              onClick={() => duplicateElement(item.id,item.type)}
+              onClick={() => duplicateElement(item.id, item.type)}
               sx={{ ml: 2 }}
             >
               <FileCopyIcon color="secondary" />

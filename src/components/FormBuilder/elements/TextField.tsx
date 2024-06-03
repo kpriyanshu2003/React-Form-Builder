@@ -1,28 +1,38 @@
-import { useState, Fragment } from "react";
-//Material UI Components
-import TextField from "@material-ui/core/TextField";
-import Box from "@material-ui/core/Box";
-import Paper from "@material-ui/core/Paper";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
-import Grid from "@material-ui/core/Grid";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-//Icons
-import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
-import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
-import FileCopyIcon from '@material-ui/icons/FileCopy';
+import { Fragment } from "react";
+
+// Material UI
+import {
+  TextField,
+  Box,
+  Paper,
+  FormGroup,
+  FormControlLabel,
+  Switch,
+  Divider,
+  IconButton,
+  Tooltip,
+  Grid,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
+
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
 
 //Form Elements
 import { formEl } from "../constants";
 
-const TextFieldInput = ({ item, handleValue, deleteEl, handleRequired, handleElType,duplicateElement }) => {
+const TextFieldInput = ({
+  item,
+  handleValue,
+  deleteEl,
+  handleRequired,
+  handleElType,
+  duplicateElement,
+}) => {
   return (
     <Fragment>
       <Paper elevation={1}>
@@ -58,7 +68,7 @@ const TextFieldInput = ({ item, handleValue, deleteEl, handleRequired, handleElT
                   id="el-type"
                   label="Type"
                   value={item.type}
-                  onChange={(e)=>handleElType(item.id,e.target.value)}
+                  onChange={(e) => handleElType(item.id, e.target.value)}
                 >
                   {formEl &&
                     formEl.map((el, key) => (
