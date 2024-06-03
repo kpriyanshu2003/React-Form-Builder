@@ -19,13 +19,14 @@ import {
 } from "@mui/material";
 
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers"; // @mui/x-date-pickers/LocalizationProvider @mui/x-date-pickers-pro
+import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers"; // @mui/x-date-pickers/LocalizationProvider @mui/x-date-pickers-pro
 
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 
 import { formEl } from "../constants";
+import { ExtendTimeInput, InputTypes } from "../../../@types/InputTypes";
 
 const TimeInput = ({
   item,
@@ -35,7 +36,7 @@ const TimeInput = ({
   handleElType,
   handleTime,
   duplicateElement,
-}) => {
+}: InputTypes & ExtendTimeInput) => {
   return (
     <Fragment>
       <Paper elevation={1}>
@@ -100,7 +101,7 @@ const TimeInput = ({
           <Tooltip title="Duplicate Element" aria-label="duplicate-element">
             <IconButton
               aria-label="duplicate-element"
-              onClick={() => duplicateElement(item.id, item.type)}
+              onClick={() => duplicateElement(item.id, item.type || "")}
               sx={{ ml: 2 }}
             >
               <FileCopyIcon color="secondary" />

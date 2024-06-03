@@ -24,6 +24,7 @@ import FileCopyIcon from "@mui/icons-material/FileCopy";
 
 //Form Elements
 import { formEl } from "../constants";
+import { InputTypes } from "../../../@types/InputTypes";
 
 const TextFieldInput = ({
   item,
@@ -32,7 +33,7 @@ const TextFieldInput = ({
   handleRequired,
   handleElType,
   duplicateElement,
-}) => {
+}: InputTypes) => {
   return (
     <Fragment>
       <Paper elevation={1}>
@@ -95,7 +96,7 @@ const TextFieldInput = ({
           <Tooltip title="Duplicate Element" aria-label="duplicate-element">
             <IconButton
               aria-label="duplicate-element"
-              onClick={() => duplicateElement(item.id, item.type)}
+              onClick={() => duplicateElement(item.id, item.type || "")}
               sx={{ ml: 2 }}
             >
               <FileCopyIcon color="secondary" />

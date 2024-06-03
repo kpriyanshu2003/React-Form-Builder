@@ -23,6 +23,7 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 
 import { formEl } from "../constants";
+import { InputTypes } from "../../../@types/InputTypes";
 
 const TextArea = ({
   item,
@@ -31,7 +32,7 @@ const TextArea = ({
   handleRequired,
   handleElType,
   duplicateElement,
-}) => {
+}: InputTypes) => {
   return (
     <Fragment>
       <Paper elevation={1}>
@@ -96,7 +97,7 @@ const TextArea = ({
           <Tooltip title="Duplicate Element" aria-label="duplicate-element">
             <IconButton
               aria-label="duplicate-element"
-              onClick={() => duplicateElement(item.id, item.type)}
+              onClick={() => duplicateElement(item.id, item.type || "")}
               sx={{ ml: 2 }}
             >
               <FileCopyIcon color="secondary" />

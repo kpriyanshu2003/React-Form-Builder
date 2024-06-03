@@ -22,6 +22,7 @@ import {
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
+import { InputTypes } from "../../../@types/InputTypes";
 
 const NumberInput = ({
   item,
@@ -30,7 +31,7 @@ const NumberInput = ({
   handleRequired,
   handleElType,
   duplicateElement,
-}) => {
+}: InputTypes) => {
   return (
     <Fragment>
       <Paper elevation={1}>
@@ -94,7 +95,7 @@ const NumberInput = ({
           <Tooltip title="Duplicate Element" aria-label="duplicate-element">
             <IconButton
               aria-label="duplicate-element"
-              onClick={() => duplicateElement(item.id, item.type)}
+              onClick={() => duplicateElement(item.id, item.type || "")}
               sx={{ ml: 2 }}
             >
               <FileCopyIcon color="secondary" />

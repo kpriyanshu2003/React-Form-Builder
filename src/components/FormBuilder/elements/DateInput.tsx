@@ -25,6 +25,7 @@ import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers"; // @mui/
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
+import { ExtendDateInput, InputTypes } from "../../../@types/InputTypes";
 
 const DateInput = ({
   item,
@@ -34,7 +35,7 @@ const DateInput = ({
   handleElType,
   handleDate,
   duplicateElement,
-}) => {
+}: InputTypes & ExtendDateInput) => {
   return (
     <Fragment>
       <Paper elevation={1}>
@@ -58,9 +59,9 @@ const DateInput = ({
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
                   label="Select Date"
-                  value={item?.date}
+                  value={item?.date || null}
                   onChange={(newDate) => {
-                    handleDate(item.id, newDate);
+                    if (item) handleDate(item.id, newDate || null);
                   }}
                   renderInput={(params) => <TextField fullWidth {...params} />}
                 />
@@ -101,7 +102,7 @@ const DateInput = ({
           <Tooltip title="Duplicate Element" aria-label="duplicate-element">
             <IconButton
               aria-label="duplicate-element"
-              onClick={() => duplicateElement(item.id, item.type)}
+              onClick={() => duplicateElement(item.id, item.type || " ")}
               sx={{ ml: 2 }}
             >
               <FileCopyIcon color="secondary" />

@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { v4 as uuid } from "uuid";
 import Nestable from "react-nestable";
 
@@ -14,22 +14,21 @@ import {
   DateInput,
   TimeInput,
 } from "./elements";
-// import Layout from "./elements/layout";
+
 import { formEl } from "./constants";
 import Header from "./Header";
+import { DataType } from "../../@types/FormBuilder";
 
 const FormBuilder = () => {
-  const initVal = formEl[0]?.value;
-
-  //State
-  const [title, setTitle] = useState("Untitled Form");
-  const [description, setDescription] = useState("");
-  const [data, setData] = useState([]);
+  const [title, setTitle] = useState("Sample Title");
+  const [description, setDescription] = useState("Sample Descrpition");
+  const [data, setData] = useState<DataType[]>([]);
   const [formData, setFormData] = useState("text");
 
   const items = data;
+  const initVal = formEl[0]?.value;
 
-  //Function to add new element
+  // Add new element
   const addElement = () => {
     const data = {
       id: uuid(),
@@ -37,114 +36,107 @@ const FormBuilder = () => {
       type: formData,
       required: false,
     };
-    setData((prevState) => [...prevState, data]);
+    setData((prevState: DataType[]) => [...prevState, data]);
     setFormData(initVal);
   };
 
-  //Function to delete element
-  const deleteEl = (id) => {
+  // Delete element
+  const deleteEl = (id: string) =>
     setData((prevState) => prevState.filter((val) => val.id !== id));
-  };
 
-  //Function to add element at specific pos and return arr
-  const addAfter = (elArray, index, newEl) => {
+  // Add element at specific pos and return arr
+  const addAfter = (elArray: DataType[], index: number, newEl: DataType) => {
     return [...elArray.slice(0, index + 1), newEl, ...elArray.slice(index + 1)];
   };
 
-  //Function to duplicate element
-  const duplicateElement = (elId, elType) => {
-    let elIdx = data.findIndex((el) => el.id === elId);
-    let newEl = {
+  // Duplicate element
+  const duplicateElement = (elId: string, elType: string) => {
+    const elIdx = data.findIndex((el) => el.id === elId);
+    const newEl = {
       id: uuid(),
       value: null,
       type: elType,
       required: false,
     };
-    let newArr = addAfter(data, elIdx, newEl);
+    const newArr = addAfter(data, elIdx, newEl);
     setData(newArr);
   };
 
-  //Function to handle sorting of elements
-  const handleOnChangeSort = ({ items }) => {
+  // TODO : Add Type
+  // Handle sorting of elements - I think not being used
+  const handleOnChangeSort = ({ items }: { items: DataType[] }) =>
     setData(items);
-  };
 
-  //Function to Handle Input Values
-  const handleValue = (id, e) => {
-    let newArr = data.map((el) => {
-      if (el.id === id) {
-        return { ...el, value: e.target.value };
-      } else {
-        return el;
-      }
+  // Handle Input Values
+  const handleValue = (
+    id: string,
+    e:
+      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      | React.FocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>
+  ) => {
+    const newArr = data.map((el) => {
+      if (el.id === id) return { ...el, value: e.target.value };
+      else return el;
     });
     setData(newArr);
   };
 
-  //Function to Handle Required
-  const handleRequired = (id) => {
-    let newArr = data.map((el) => {
-      if (el.id === id) {
-        return { ...el, required: !el.required };
-      } else {
-        return el;
-      }
+  // Handle Required
+  const handleRequired = (id: string) => {
+    const newArr = data.map((el) => {
+      if (el.id === id) return { ...el, required: !el.required };
+      else return el;
     });
     setData(newArr);
   };
 
-  //Function to Handle Element Type
-  const handleElType = (id, type) => {
-    let newArr = data.map((el) => {
-      if (el.id === id) {
-        return { ...el, type: type };
-      } else {
-        return el;
-      }
+  // Handle Element Type
+  const handleElType = (id: string, type: string) => {
+    const newArr = data.map((el) => {
+      if (el.id === id) return { ...el, type: type };
+      else return el;
     });
     setData(newArr);
   };
 
-  //Function to Handle Options
-  const addOption = (id, newOption) => {
-    let newArr = data.map((el) => {
+  // TODO : Add Type
+  // Handle Options
+  const addOption = (id: string, newOption: DataType) => {
+    const newArr = data.map((el) => {
       if (el.id === id) {
         const objVal = "options" in el ? el?.options : [];
-        return { ...el, options: [...objVal, newOption] };
-      } else {
-        return el;
-      }
+        const options = Array.isArray(objVal) ? objVal : [];
+        return { ...el, options: [...options, newOption] };
+      } else return el;
+    });
+    setData(newArr as DataType[]);
+  };
+
+  // Handle Date
+  const handleDate = (id: string, dateVal: Date | null) => {
+    const newArr = data.map((el) => {
+      if (el.id === id) return { ...el, date: dateVal };
+      else return el;
+    });
+    setData(newArr as DataType[]);
+  };
+
+  // Handle Time
+  const handleTime = (id: string, dateVal: Date | null) => {
+    const newArr = data.map((el) => {
+      if (el.id === id) return { ...el, time: dateVal };
+      else return el;
     });
     setData(newArr);
   };
 
-  //Function to Handle Date
-  const handleDate = (id, dateVal) => {
-    let newArr = data.map((el) => {
-      if (el.id === id) {
-        return { ...el, date: dateVal };
-      } else {
-        return el;
-      }
-    });
-    setData(newArr);
-  };
-
-  //Function to Handle Time
-  const handleTime = (id, dateVal) => {
-    let newArr = data.map((el) => {
-      if (el.id === id) {
-        return { ...el, time: dateVal };
-      } else {
-        return el;
-      }
-    });
-    setData(newArr);
-  };
-
-  //Function to Change Option Values
-  const handleOptionValues = (elId, optionId, optionVal) => {
-    let newArr = data.map((el) => {
+  // Change Option Values
+  const handleOptionValues = (
+    elId: string,
+    optionId: string,
+    optionVal: string
+  ) => {
+    const newArr = data.map((el) => {
       if (el.id === elId) {
         el?.options &&
           el?.options.map((opt) => {
@@ -153,29 +145,25 @@ const FormBuilder = () => {
             }
           });
         return el;
-      } else {
-        return el;
-      }
+      } else return el;
     });
     setData(newArr);
   };
 
-  //Function to Delete Optin
-  const deleteOption = (elId, optionId) => {
-    let newArr = data.map((el) => {
+  // Delete Option - When Radio Input
+  const deleteOption = (elId: string, optionId: string) => {
+    const newArr = data.map((el) => {
       if (el.id === elId) {
-        let newOptions =
-          el?.options && el?.options.filter((opt) => opt.id != optionId);
-        return { ...el, options: newOptions };
-      } else {
-        return el;
-      }
+        const newOptions =
+          el?.options && el?.options.filter((opt) => opt.id !== optionId);
+        return { ...el, options: newOptions || [] }; // Ensure newOptions is always an array
+      } else return el;
     });
-    setData(newArr);
+    setData(newArr as DataType[]);
   };
 
-  //Render items
-  const renderElements = ({ item }) => {
+  // Render items
+  const renderElements = ({ item }: { item: DataType }) => {
     switch (item.type) {
       case "text":
         return (

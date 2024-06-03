@@ -25,6 +25,7 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 
 import { formEl } from "../constants";
+import { ExtendRadioInput, InputTypes } from "../../../@types/InputTypes";
 
 const RadioInput = ({
   item,
@@ -36,14 +37,11 @@ const RadioInput = ({
   handleOptionValues,
   deleteOption,
   duplicateElement,
-}) => {
+}: InputTypes & ExtendRadioInput) => {
   //Create new option
-  const createNewOption = (id) => {
+  const createNewOption = (id: string) => {
     console.log(id, typeof id, "this is id");
-    const data = {
-      id: uuid(),
-      value: "",
-    };
+    const data = { id: uuid(), value: "" };
     addOption(id, data);
   };
 
@@ -132,7 +130,7 @@ const RadioInput = ({
           <Tooltip title="Duplicate Element" aria-label="duplicate-element">
             <IconButton
               aria-label="duplicate-element"
-              onClick={() => duplicateElement(item.id, item.type)}
+              onClick={() => duplicateElement(item.id, item.type || "")}
               sx={{ ml: 2 }}
             >
               <FileCopyIcon color="secondary" />

@@ -5,6 +5,7 @@ import {
   Box,
   Divider,
   FormControl,
+  FormControlLabel,
   FormGroup,
   Grid,
   IconButton,
@@ -22,6 +23,7 @@ import FileCopyIcon from "@mui/icons-material/FileCopy";
 
 //Form Elements
 import { formEl } from "../../constants";
+import { LayoutType } from "../../../../@types/Layout";
 
 const Layout = ({
   item,
@@ -30,7 +32,7 @@ const Layout = ({
   handleElType,
   duplicateElement,
   children,
-}) => {
+}: LayoutType) => {
   return (
     <Fragment>
       <Paper elevation={1}>
@@ -79,7 +81,7 @@ const Layout = ({
           <Tooltip title="Duplicate Element" aria-label="duplicate-element">
             <IconButton
               aria-label="duplicate-element"
-              onClick={() => duplicateElement(item.id, item.type)}
+              onClick={() => duplicateElement(item.id, item.type || "")}
               sx={{ ml: 2 }}
             >
               <FileCopyIcon color="secondary" />
